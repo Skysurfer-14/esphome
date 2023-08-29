@@ -88,7 +88,7 @@ bool HOT IRAM_ATTR ESPOneWire::read_bit() {
 #ifdef USE_ESP32
   uint32_t timing_constant = 12;
 #else
-  uint32_t timing_constant = 14;
+  uint32_t timing_constant = 15; //14;
 #endif
 
   // measure from start value directly, to get best accurate timing no matter
