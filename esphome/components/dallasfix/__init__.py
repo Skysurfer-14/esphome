@@ -6,7 +6,7 @@ from esphome.const import CONF_ID, CONF_PIN
 MULTI_CONF = True
 AUTO_LOAD = ["sensor"]
 
-dallas_ns = cg.esphome_ns.namespace("dallas")
+dallas_ns = cg.esphome_ns.namespace("dallasfix")
 DallasComponent = dallas_ns.class_("DallasComponent", cg.PollingComponent)
 
 CONFIG_SCHEMA = cv.Schema(

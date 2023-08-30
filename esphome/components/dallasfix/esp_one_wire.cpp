@@ -5,7 +5,7 @@
 namespace esphome {
 namespace dallasfix {
 
-static const char *const TAG = "dallas.one_wire";
+static const char *const TAG = "dallasfix.one_wire";
 
 const uint8_t ONE_WIRE_ROM_SELECT = 0x55;
 const int ONE_WIRE_ROM_SEARCH = 0xF0;
@@ -83,6 +83,7 @@ bool HOT IRAM_ATTR ESPOneWire::read_bit() {
   // esp32 arduino appears to pull the bus low only after the digital_write(false),
   // whereas on esp-idf it already happens during the pin_mode(OUTPUT)
   // manually correct for this with these constants.
+#define USE_ESP32
 
 #ifdef USE_ESP32
   uint32_t timing_constant = 12;
