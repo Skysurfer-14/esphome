@@ -3,7 +3,7 @@
 #include "esphome/core/helpers.h"
 
 namespace esphome {
-namespace dallas {
+namespace dallasfix {
 
 static const char *const TAG = "dallas.one_wire";
 
@@ -41,19 +41,18 @@ bool HOT IRAM_ATTR ESPOneWire::reset() {
 }
 
 void HOT IRAM_ATTR ESPOneWire::write_bit(bool bit) {
-  // drive bus low
-  pin_.pin_mode(gpio::FLAG_OUTPUT);
-  pin_.digital_write(false);
-
   // from datasheet:
   // write 0 low time: t_low0: min=60µs, max=120µs
   // write 1 low time: t_low1: min=1µs, max=15µs
   // time slot: t_slot: min=60µs, max=120µs
   // recovery time: t_rec: min=1µs
   // ds18b20 appears to read the bus after roughly 14µs
-  uint32_t delay0 = bit ? 6 : 60;
-  uint32_t delay1 = bit ? 54 : 5;
+  uint32_t delay0 = bit ? 1 : 60;
+  uint32_t delay1 = bit ? 64 : 5;
 
+  // drive bus low
+  pin_.pin_mode(gpio::FLAG_OUTPUT);
+  pin_.digital_write(false);
   // delay A/C
   delayMicroseconds(delay0);
   // release bus
