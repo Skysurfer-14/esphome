@@ -163,7 +163,7 @@ bool IRAM_ATTR DallasTemperatureSensor::read_scratch_pad() {
   auto *wire = this->parent_->one_wire_;
 
   {
-    InterruptLock lock;
+  //  InterruptLock lock;
 
     if (!wire->reset()) {
       return false;
