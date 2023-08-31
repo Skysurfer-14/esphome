@@ -134,8 +134,8 @@ uint64_t IRAM_ATTR ESPOneWire::read64() {
 }
 void IRAM_ATTR ESPOneWire::select(uint64_t address) {
   // drive bus high
-  pin_.pin_mode(gpio::FLAG_OUTPUT);
   pin_.digital_write(true);
+  pin_.pin_mode(gpio::FLAG_OUTPUT);
   
   this->write8(ONE_WIRE_ROM_SELECT);
   this->write64(address);
