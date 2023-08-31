@@ -162,6 +162,7 @@ const std::string &DallasTemperatureSensor::get_address_name() {
 bool IRAM_ATTR DallasTemperatureSensor::read_scratch_pad() {
   auto *wire = this->parent_->one_wire_;
 
+  InterruptLock lock;
   {
   //  InterruptLock lock;
 
@@ -171,7 +172,7 @@ bool IRAM_ATTR DallasTemperatureSensor::read_scratch_pad() {
   }
 
   {
-    InterruptLock lock;
+  //  InterruptLock lock;
 
     wire->select(this->address_);
     wire->write8(DALLAS_COMMAND_READ_SCRATCH_PAD);

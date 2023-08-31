@@ -47,8 +47,8 @@ void HOT IRAM_ATTR ESPOneWire::write_bit(bool bit) {
   // time slot: t_slot: min=60µs, max=120µs
   // recovery time: t_rec: min=1µs
   // ds18b20 appears to read the bus after roughly 14µs
-  uint32_t delay0 = bit ? 1 : 60;
-  uint32_t delay1 = bit ? 64 : 5;
+  uint32_t delay0 = bit ? 6 : 60;
+  uint32_t delay1 = bit ? 54 : 5;
 
 // drive bus low
   pin_.pin_mode(gpio::FLAG_OUTPUT);
@@ -83,7 +83,6 @@ bool HOT IRAM_ATTR ESPOneWire::read_bit() {
   // esp32 arduino appears to pull the bus low only after the digital_write(false),
   // whereas on esp-idf it already happens during the pin_mode(OUTPUT)
   // manually correct for this with these constants.
-#define USE_ESP32
 
 #ifdef USE_ESP32
   uint32_t timing_constant = 12;
